@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Manager</title>
+    <!-- Use Inter font from Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Partner Manager</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-view="dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-layout-dashboard">
+                        <rect width="7" height="9" x="3" y="3" rx="1" />
+                        <rect width="7" height="5" x="14" y="3" rx="1" />
+                        <rect width="7" height="9" x="14" y="12" rx="1" />
+                        <rect width="7" height="5" x="3" y="16" rx="1" />
+                    </svg>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-view="pending">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-clipboard-list">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                        <path d="M15 2H9a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1Z" />
+                        <path d="M12 11h4" />
+                        <path d="M12 16h4" />
+                        <path d="M8 11h.01" />
+                        <path d="M8 16h.01" />
+                    </svg>
+                    Pendências
+                </button>
+                <button class="nav-item" data-view="current-reps">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-users">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    Rep. Atuais
+                </button>
+                <button class="nav-item" data-view="opportunities">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-target">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="6" />
+                        <circle cx="12" cy="12" r="2" />
+                    </svg>
+                    Oportunidades
+                </button>
+                <button class="nav-item" data-view="potential-reps">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-user-plus">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" x2="19" y1="8" y2="14" />
+                        <line x1="22" x2="16" y1="11" y2="11" />
+                    </svg>
+                    Rep. Em Potencial
+                </button>
+                <button class="nav-item" data-view="resellers">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-store">
+                        <path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" />
+                        <path d="M4 12v8a2 2 0 0 0 2 2h2V14h8v8h2a2 2 0 0 0 2-2v-8" />
+                        <path d="M23 9a2 2 0 0 1-2 2h-1">
+                            <path d="M19 11a2 2 0 0 1-4 0" />
+                            <path d="M15 11a2 2 0 0 1-4 0" />
+                            <path d="M11 11a2 2 0 0 1-4 0" />
+                            <path d="M7 11a2 2 0 0 1-4 0H2a2 2 0 0 1-2-2" />
+                    </svg>
+                    Revendedores
+                </button>
+                <button class="nav-item" data-view="agenda">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-calendar-days">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                        <line x1="16" x2="16" y1="2" y2="6" />
+                        <line x1="8" x2="8" y1="2" y2="6" />
+                        <line x1="3" x2="21" y1="10" y2="10" />
+                        <path d="M8 14h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M8 18h.01" />
+                        <path d="M12 18h.01" />
+                        <path d="M16 18h.01" />
+                    </svg>
+                    Agenda
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary w-full" id="btnExportCSV">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-download">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg>
+                    Exportar CSV
+                </button>
+                <label for="fileImportCSV" class="btn btn-outline w-full mt-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-upload">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" x2="12" y1="3" y2="15" />
+                    </svg>
+                    Importar CSV
+                </label>
+                <input type="file" id="fileImportCSV" accept=".csv" style="display: none;" />
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="topbar-actions" id="topbar-actions">
+                    <!-- Dynamic actions based on view -->
+                </div>
+            </header>
+
+            <div class="view-container">
+                <!-- VIEW: Dashboard -->
+                <section id="view-dashboard" class="view active">
+                    <div class="dashboard-grid">
+                        <div class="metric-card">
+                            <h3>Total Rep. Atuais</h3>
+                            <div class="metric-value" id="metric-current-reps">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Total Oportunidades</h3>
+                            <div class="metric-value" id="metric-total-opps">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Oportunidades Ativas</h3>
+                            <div class="metric-value" id="metric-active-opps">0</div>
+                        </div>
+                        <div class="metric-card highlight">
+                            <h3>Valor de Vendas</h3>
+                            <div class="metric-value" id="metric-sales-value">$0</div>
+                        </div>
+                        <div class="metric-card">
+                            <h3>Revendas Contratadas</h3>
+                            <div class="metric-value" id="metric-total-resellers">0</div>
+                        </div>
+                    </div>
+
+                    <div class="rankings-grid">
+                        <div class="ranking-panel card">
+                            <div class="card-header">
+                                <h3>Ranking por Quantidade de Oportunidades</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="ranking-list" id="ranking-qty-list">
+                                    <!-- Populated by JS -->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="ranking-panel card">
+                            <div class="card-header">
+                                <h3>Ranking por Valor de Venda (USD)</h3>
+                            </div>
+                            <div class="card-body">
+                                <ul class="ranking-list" id="ranking-value-list">
+                                    <!-- Populated by JS -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Pending -->
+                <section id="view-pending" class="view">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tarefas e Pendências</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="table-pending">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Categoria / Cliente</th>
+                                        <th>Descrição</th>
+                                        <th>Prazo</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Current Reps -->
+                <section id="view-current-reps" class="view">
+                    <div class="card">
+                        <div class="card-header d-flex justify-between align-center">
+                            <h3>Representantes Atuais</h3>
+                            <button class="btn btn-primary" onclick="window.app.views.currentReps.openModal()">+ Novo
+                                Representante</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="table-current-reps">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Empresa</th>
+                                        <th>Cidade</th>
+                                        <th>Contrato Ativo</th>
+                                        <th>Doc. Atualizada</th>
+                                        <th>Oportunidades</th>
+                                        <th>Vendas (USD)</th>
+                                        <th>Tarefas Pendentes</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Opportunities -->
+                <section id="view-opportunities" class="view">
+                    <div class="card">
+                        <div class="card-header d-flex justify-between align-center">
+                            <h3>Gestão de Oportunidades</h3>
+                            <button class="btn btn-primary" onclick="window.app.views.opportunities.openModal()">+ Nova
+                                Oportunidade</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="table-opportunities">
+                                <thead>
+                                    <tr>
+                                        <th>Cliente</th>
+                                        <th>Equipamento</th>
+                                        <th>Representante</th>
+                                        <th>Temperatura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Potential Reps -->
+                <section id="view-potential-reps" class="view">
+                    <div class="card">
+                        <div class="card-header d-flex justify-between align-center">
+                            <h3>Representantes em Potencial</h3>
+                            <button class="btn btn-primary" onclick="window.app.views.potentialReps.openModal()">+ Novo
+                                Potencial</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="table-potential-reps">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Empresa</th>
+                                        <th>Local</th>
+                                        <th>Área de Atuação</th>
+                                        <th>Tecnologia</th>
+                                        <th>Pendências</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Resellers -->
+                <section id="view-resellers" class="view">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-target="resellers-potential">Potenciais</button>
+                        <button class="tab-btn" data-target="resellers-contracted">Contratados</button>
+                    </div>
+
+                    <div class="tab-content active" id="tab-resellers-potential">
+                        <div class="card">
+                            <div class="card-header d-flex justify-between align-center">
+                                <h3>Revendedores em Potencial</h3>
+                                <button class="btn btn-primary"
+                                    onclick="window.app.views.resellers.openModal('potential')">+ Novo
+                                    Potencial</button>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table" id="table-resellers-potential">
+                                    <thead>
+                                        <tr>
+                                            <th>Empresa</th>
+                                            <th>Cidade de Operação</th>
+                                            <th>Pendências</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- JS populated -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-resellers-contracted">
+                        <div class="card">
+                            <div class="card-header d-flex justify-between align-center">
+                                <h3>Revendedores Contratados</h3>
+                                <button class="btn btn-primary"
+                                    onclick="window.app.views.resellers.openModal('contracted')">+ Novo
+                                    Contratado</button>
+                            </div>
+                            <div class="table-container">
+                                <table class="data-table" id="table-resellers-contracted">
+                                    <thead>
+                                        <tr>
+                                            <th>Empresa</th>
+                                            <th>Cidade de Operação</th>
+                                            <th>Saldos Comprados</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- JS populated -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Internal Tasks -->
+                <section id="view-internal-tasks" class="view">
+                    <div class="card">
+                        <div class="card-header d-flex justify-between align-center">
+                            <h3>Controle de Tarefas Internas</h3>
+                            <button class="btn btn-primary" onclick="window.app.views.internalTasks.openModal()">+ Nova
+                                Tarefa</button>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="table-internal-tasks">
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Descrição</th>
+                                        <th>Prazo</th>
+                                        <th>Data de Conclusão</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- JS populated -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIEW: Agenda -->
+                <section id="view-agenda" class="view" style="height: 100%;">
+                    <div class="agenda-layout">
+                        <!-- Left Panel: Calendar -->
+                        <div class="calendar-panel card" style="margin-bottom:0;">
+                            <div class="card-header calendar-controls" style="margin-bottom:0;">
+                                <button class="btn btn-outline btn-sm"
+                                    onclick="window.app.views.agenda.changeMonth(-1)">&lt;</button>
+                                <h2 id="cal-month-year">Janeiro 2026</h2>
+                                <button class="btn btn-outline btn-sm"
+                                    onclick="window.app.views.agenda.changeMonth(1)">&gt;</button>
+                            </div>
+                            <div class="card-body" style="display:flex; flex-direction:column; flex:1;">
+                                <div class="calendar-grid" style="flex: 0 0 auto;">
+                                    <div class="calendar-day-header">Dom</div>
+                                    <div class="calendar-day-header">Seg</div>
+                                    <div class="calendar-day-header">Ter</div>
+                                    <div class="calendar-day-header">Qua</div>
+                                    <div class="calendar-day-header">Qui</div>
+                                    <div class="calendar-day-header">Sex</div>
+                                    <div class="calendar-day-header">Sáb</div>
+                                </div>
+                                <div class="calendar-grid" id="calendar-days-grid" style="margin-top: 8px;">
+                                    <!-- Days populated via JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Daily Agenda -->
+                        <div class="agenda-panel card" style="margin-bottom:0;">
+                            <div class="card-header d-flex justify-between align-center">
+                                <h3 id="agenda-daily-title">Agenda</h3>
+                                <button class="btn btn-primary btn-sm" onclick="window.app.views.agenda.openModal()">+
+                                    Adicionar</button>
+                            </div>
+                            <div class="card-body"
+                                style="display:flex; flex-direction:column; flex:1; overflow:hidden;">
+                                <div class="agenda-date-header" id="agenda-selected-date">Selecione um dia</div>
+                                <ul class="agenda-list" id="agenda-daily-list">
+                                    <!-- Agenda items populated via JS -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Título Modal</h2>
+                <button class="icon-btn" onclick="window.app.ui.closeModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-x">
+                        <path d="M18 6 6 18" />
+                        <path d="m6 6 12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Injected via JS -->
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button class="btn btn-outline" onclick="window.app.ui.closeModal()">Cancelar</button>
+                <button class="btn btn-primary" id="modal-save-btn">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts (Order matters) -->
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="js/store.js"></script>
+    <script src="js/csv.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/views/dashboard.js"></script>
+    <script src="js/views/currentReps.js"></script>
+    <script src="js/views/opportunities.js"></script>
+    <script src="js/views/potentialReps.js"></script>
+    <script src="js/views/resellers.js"></script>
+    <script src="js/views/pending.js"></script>
+    <script src="js/views/internalTasks.js"></script>
+    <script src="js/views/agenda.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
