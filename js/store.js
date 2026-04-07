@@ -14,7 +14,7 @@ let db = null;
 // Só inicializa o Firebase se a apiKey for substituída
 if (firebaseConfig.apiKey !== "SUA_API_KEY") {
     firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
+    db = firebase.database();
 }
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
@@ -51,9 +51,9 @@ class Store {
         }
 
         // Ouve as mudanças na nuvem em tempo real
-        db.collection("partnerData").doc("mainStore").onSnapshot((doc) => {
-            if (doc.exists) {
-                const parsed = doc.data();
+        db.ref("partnerData/mainStore").on("value", (snapshot) => {
+            if (snapshot.exists()) {
+                const parsed = snapshot.val();
                 this.data = { ...this.data, ...parsed };
                 if (!this.data.agenda) this.data.agenda = [];
                 if (!this.data.internalTasks) this.data.internalTasks = [];
@@ -76,7 +76,7 @@ class Store {
             return;
         }
 
-        db.collection("partnerData").doc("mainStore").set(this.data)
+        db.ref("partnerData/mainStore").set(this.data)
             .catch(error => {
                 console.error("Erro ao salvar no Firebase: ", error);
             });
@@ -137,7 +137,7 @@ class Store {
     }
 
     overwriteAllData(newData) {
-        this.data = newData;
+        this.data = { ...this.data, ...newData };
         if (!this.data.agenda) this.data.agenda = [];
         if (!this.data.internalTasks) this.data.internalTasks = [];
         if (!this.data.opportunities) this.data.opportunities = [];

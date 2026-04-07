@@ -68,21 +68,29 @@ function csvToJson(csv) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Export Event
+        // Export Event
     document.getElementById('btnExportCSV').addEventListener('click', () => {
         const db = window.app.store.data;
         
-        // Define an wrapper format to dump all 3 tables
         let csvContent = "";
         
         csvContent += "=== Current Representatives ===\n";
-        csvContent += jsonToCsv(db.currentReps) + "\n\n";
+        csvContent += jsonToCsv(db.currentReps || []) + "\n\n";
 
         csvContent += "=== Potential Representatives ===\n";
-        csvContent += jsonToCsv(db.potentialReps) + "\n\n";
+        csvContent += jsonToCsv(db.potentialReps || []) + "\n\n";
 
         csvContent += "=== Resellers ===\n";
-        csvContent += jsonToCsv(db.resellers) + "\n";
+        csvContent += jsonToCsv(db.resellers || []) + "\n\n";
+
+        csvContent += "=== Agenda ===\n";
+        csvContent += jsonToCsv(db.agenda || []) + "\n\n";
+
+        csvContent += "=== Internal Tasks ===\n";
+        csvContent += jsonToCsv(db.internalTasks || []) + "\n\n";
+
+        csvContent += "=== Opportunities ===\n";
+        csvContent += jsonToCsv(db.opportunities || []) + "\n";
         
         const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
@@ -103,24 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onload = (evt) => {
             const raw = evt.target.result;
             
-            // Note: because the business requires managing 3 different structures, dumping them in one file 
-            // requires splitting. Here we parse the exact format we generated.
-            const sections = raw.split(/===\s.*?\s===\n/);
+            // Regex handles \r\n and \n safely
+            const sections = raw.split(/===\s.*?\s===\r?\n/);
             
-            // By splitting we get:
-            // sections[0] (empty or junk before first header)
-            // sections[1] Current Reps
-            // sections[2] Potential Reps
-            // sections[3] Resellers
-
+            // At least the first 3 original sections + 1 empty string before first header = 4
             if (sections.length >= 4) {
-               if(confirm("Deseja SOBRESCREVER todos os dados atuais por este backup?")) {
-                  const currentReps = csvToJson(sections[1].trim() + "\n");
-                  const potentialReps = csvToJson(sections[2].trim() + "\n");
-                  const resellers = csvToJson(sections[3].trim() + "\n");
+               if(confirm("Deseja SOBRESCREVER os dados pelas informações deste backup?")) {
+                  
+                  const newData = {};
+                  
+                  newData.currentReps = csvToJson(sections[1].trim() + "\n");
+                  newData.potentialReps = csvToJson(sections[2].trim() + "\n");
+                  newData.resellers = csvToJson(sections[3].trim() + "\n");
                   
                   // Clean up potentially parsed Number/Booleans 
-                  currentReps.forEach(r => {
+                  newData.currentReps.forEach(r => {
                       r.activeContract = r.activeContract === true || String(r.activeContract) === 'true';
                       r.docsUpToDate = r.docsUpToDate === true || String(r.docsUpToDate) === 'true';
                       r.totalOpportunities = Number(r.totalOpportunities) || 0;
@@ -128,9 +133,17 @@ document.addEventListener('DOMContentLoaded', () => {
                       r.salesValueUSD = Number(r.salesValueUSD) || 0;
                   });
 
-                  window.app.store.overwriteAllData({
-                      currentReps, potentialReps, resellers
-                  });
+                  if (sections.length > 4 && sections[4]) {
+                      newData.agenda = csvToJson(sections[4].trim() + "\n");
+                  }
+                  if (sections.length > 5 && sections[5]) {
+                      newData.internalTasks = csvToJson(sections[5].trim() + "\n");
+                  }
+                  if (sections.length > 6 && sections[6]) {
+                      newData.opportunities = csvToJson(sections[6].trim() + "\n");
+                  }
+
+                  window.app.store.overwriteAllData(newData);
                   
                   window.location.reload();
                }
